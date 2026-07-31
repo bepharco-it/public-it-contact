@@ -424,7 +424,7 @@
 
       /* ---------- HOURS ---------- */
       .hours {
-        padding: 20px 28px 6px;
+        padding: 20px 28px 15px;
       }
       .hours-row {
         display: flex;
@@ -597,9 +597,9 @@
           </div>
         </div>
 
-        <div class="perf"></div>
+        <div class="perf" id="beginSectionAsset"></div>
 
-        <div class="stub">
+        <div class="stub" id="sectionAsset">
           <div class="field">
             <p class="k">Mã thiết bị</p>
             <p class="v" id="stubAsset">______________</p>
@@ -618,8 +618,8 @@
 
     <script>
       /* =======================================================================
-     CONFIG — CHỈ CẦN SỬA CÁC GIÁ TRỊ TRONG DẤU NGOẶC KÉP "..." BÊN DƯỚI
-     ======================================================================= */
+      CONFIG — CHỈ CẦN SỬA CÁC GIÁ TRỊ TRONG DẤU NGOẶC KÉP "..." BÊN DƯỚI
+      ======================================================================= */
       const CONFIG = {
         companyName: "Công ty CP Dược phẩm Bến Tre — Bepharco",
         deptName: "Phòng Công Nghệ Thông Tin",
@@ -744,14 +744,21 @@
       }
 
       /* =======================================================================
-     MÃ THIẾT BỊ / NGÀY BÀN GIAO — RIÊNG CHO TỪNG MÁY (đọc từ URL shortcut)
-     Ví dụ: ...lien-he-it.html?asset=LAPTOP-0231&date=22-07-2026
-     ======================================================================= */
+      MÃ THIẾT BỊ / NGÀY BÀN GIAO — RIÊNG CHO TỪNG MÁY (đọc từ URL shortcut)
+      Ví dụ: ...lien-he-it.html?asset=LAPTOP-0231&date=22-07-2026
+      ======================================================================= */
       const params = new URLSearchParams(window.location.search);
       const assetVal = params.get("asset");
       const dateVal = params.get("date");
-      if (assetVal) document.getElementById("stubAsset").textContent = assetVal;
-      if (dateVal) document.getElementById("stubDate").textContent = dateVal;
+
+      if (!assetVal || !dateVal) {
+        document.getElementById("eyebrow").style.display = "none";
+        document.getElementById("sectionAsset").style.display = "none";
+        document.getElementById("beginSectionAsset").style.display = "none";
+      } else {
+        document.getElementById("stubAsset").textContent = assetVal;
+        document.getElementById("stubDate").textContent = dateVal;
+      }
     </script>
   </body>
 </html>
