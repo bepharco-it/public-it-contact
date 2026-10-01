@@ -78,6 +78,10 @@
         outline-offset: 2px;
       }
 
+      p {
+        text-align: justify;
+      }
+
       /* ---------- Nút quay lại ---------- */
       .back {
         display: inline-flex;
@@ -139,7 +143,7 @@
       .company-name {
         margin: 0;
         padding-bottom: 7px;
-        font-size: 16px;
+        font-size: 29px;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -150,7 +154,6 @@
         margin: 0;
         font-size: 24px;
         font-weight: 800;
-        letter-spacing: -0.01em;
         line-height: 1.25;
       }
       .page-sub {
@@ -158,7 +161,6 @@
         font-size: 14px;
         line-height: 1.55;
         color: #c7d2e3;
-        max-width: 520px;
       }
 
       /* ---------- Chuẩn bị ---------- */
@@ -531,9 +533,162 @@
           font-size: 14px;
         }
       }
+
+      /* ---------- Thanh tiêu đề neo trên cùng (hiện khi cuộn qua header lớn) ---------- */
+      .pinbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 30;
+        padding-top: env(safe-area-inset-top, 0px);
+        background: linear-gradient(155deg, var(--ink) 0%, var(--ink-2) 100%);
+        color: #fff;
+        box-shadow: 0 6px 18px -8px rgba(16, 24, 38, 0.55);
+        transform: translateY(-100%);
+        visibility: hidden;
+        transition:
+          transform 0.22s ease,
+          visibility 0s linear 0.22s;
+      }
+      .pinbar.show {
+        transform: none;
+        visibility: visible;
+        transition:
+          transform 0.22s ease,
+          visibility 0s;
+      }
+      .pinbar-in {
+        max-width: 752px;
+        margin: 0 auto;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .pin-back {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .pin-back:hover {
+        background: rgba(255, 255, 255, 0.24);
+      }
+      .pin-logo {
+        flex: none;
+        width: 56px;
+        height: 34px;
+        border-radius: 9px;
+        background: #fff;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pin-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .pin-title {
+        min-width: 0;
+        font-size: 14.5px;
+        font-weight: 800;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      @media (max-width: 520px) {
+        .pin-back .pin-back-text {
+          display: none;
+        }
+        .pin-back {
+          padding: 7px 11px;
+        }
+        .pinbar-in {
+          gap: 10px;
+          padding: 8px 12px;
+        }
+        .pin-title {
+          font-size: 13.5px;
+        }
+      }
+      /* ---------- Nút lên đầu trang ---------- */
+      .wrap {
+        padding-bottom: 56px; /* chừa chỗ để nút lên đầu trang không đè chữ cuối trang */
+      }
+      .to-top {
+        position: fixed;
+        right: 16px;
+        bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+        z-index: 30;
+        width: 46px;
+        height: 46px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: var(--ink);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 8px 20px -6px rgba(16, 24, 38, 0.55);
+        opacity: 0;
+        transform: translateY(12px);
+        visibility: hidden;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease,
+          visibility 0s linear 0.2s;
+      }
+      .to-top.show {
+        opacity: 1;
+        transform: none;
+        visibility: visible;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease,
+          visibility 0s;
+      }
+      .to-top:hover {
+        background: var(--ink-2);
+      }
+      .to-top svg {
+        width: 22px;
+        height: 22px;
+        display: block;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pinbar,
+        .pinbar.show,
+        .to-top,
+        .to-top.show {
+          transition: none;
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="pinbar" id="pinbar">
+      <div class="pinbar-in">
+        <a class="pin-back" id="pinBack" href="index.html" aria-label="Quay lại trang Liên hệ phòng CNTT"
+          >←<span class="pin-back-text">Liên hệ CNTT</span></a
+        >
+        <span class="pin-logo"><img id="pinLogo" alt="Bepharco" /></span>
+        <span class="pin-title">Hướng dẫn đăng nhập email</span>
+      </div>
+    </div>
+
     <div class="wrap">
       <a class="back" id="backTop" href="index.html">← Liên hệ phòng CNTT</a>
 
@@ -915,6 +1070,13 @@
       </p>
     </div>
 
+    <button type="button" class="to-top" id="toTop" aria-label="Lên đầu trang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5" />
+        <path d="M5 12l7-7 7 7" />
+      </svg>
+    </button>
+
     <dialog id="viewer" aria-label="Xem ảnh lớn">
       <img id="viewerImg" alt="" />
       <button type="button" class="close" id="viewerClose">Đóng</button>
@@ -933,6 +1095,27 @@
       const backHref = CONTACT_URL + window.location.search;
       document.getElementById("backTop").href = backHref;
       document.getElementById("backBottom").href = backHref;
+
+      /* Thanh tiêu đề neo: chỉ hiện khi header lớn đã cuộn khuất phía trên */
+      document.getElementById("pinBack").href = backHref;
+      document.getElementById("pinLogo").src =
+        document.querySelector(".brand-badge img").src;
+      const pinbar = document.getElementById("pinbar");
+      new IntersectionObserver(function (entries) {
+        const e = entries[0];
+        const past = !e.isIntersecting && e.boundingClientRect.top < 0;
+        pinbar.classList.toggle("show", past);
+        toTop.classList.toggle("show", past);
+      }).observe(document.querySelector(".ticket-head"));
+
+      /* Nút lên đầu trang */
+      const toTop = document.getElementById("toTop");
+      toTop.addEventListener("click", function () {
+        const reduce = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      });
       document.getElementById("contactInline").href = backHref;
 
       /* Bấm vào ảnh để xem lớn */
