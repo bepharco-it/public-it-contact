@@ -681,8 +681,12 @@
   <body>
     <div class="pinbar" id="pinbar">
       <div class="pinbar-in">
-        <a class="pin-back" id="pinBack" href="index.html" aria-label="Quay lại trang Liên hệ phòng CNTT"
-          >←<span class="pin-back-text">Liên hệ CNTT</span></a
+        <a
+          class="pin-back"
+          id="pinBack"
+          href="index.html"
+          aria-label="Quay lại trang Liên hệ phòng CNTT"
+          >←<span class="pin-back-text">Liên hệ phòng CNTT</span></a
         >
         <span class="pin-logo"><img id="pinLogo" alt="Bepharco" /></span>
         <span class="pin-title">Hướng dẫn đăng nhập email</span>
@@ -1046,32 +1050,31 @@
           </div>
           <div class="note warn">
             <b>Cần dùng ứng dụng Outlook trên máy tính?</b> Vui lòng
-            <a id="contactInline" href="index.html"><b>liên hệ phòng IT</b></a>
+            <a id="contactInline" href="index.html"
+              ><b>liên hệ phòng CNTT</b></a
+            >
             để được hỗ trợ.
-          </div>
-          <div class="btn-row" style="margin-top: 16px">
-            <a
-              class="btn primary"
-              href="https://outlook.office.com"
-              target="_blank"
-              rel="noopener"
-              >Mở hộp thư Outlook</a
-            >
-            <a class="btn ghost" id="backBottom" href="index.html"
-              >Cần hỗ trợ? Liên hệ phòng CNTT</a
-            >
           </div>
         </div>
       </div>
 
       <p class="footnote">
-        Làm theo hướng dẫn mà vẫn gặp lỗi? Liên hệ phòng CNTT qua Teams hoặc
-        Zalo.
+        Làm theo hướng dẫn mà vẫn gặp lỗi?
+        <a id="contactFootnote" href="index.html">Liên hệ phòng CNTT</a> để được
+        hỗ trợ.
       </p>
     </div>
 
     <button type="button" class="to-top" id="toTop" aria-label="Lên đầu trang">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
         <path d="M12 19V5" />
         <path d="M5 12l7-7 7 7" />
       </svg>
@@ -1094,7 +1097,6 @@
          để khi quay lại, trang Liên hệ vẫn hiện đúng mã thiết bị / ngày bàn giao. */
       const backHref = CONTACT_URL + window.location.search;
       document.getElementById("backTop").href = backHref;
-      document.getElementById("backBottom").href = backHref;
 
       /* Thanh tiêu đề neo: chỉ hiện khi header lớn đã cuộn khuất phía trên */
       document.getElementById("pinBack").href = backHref;
