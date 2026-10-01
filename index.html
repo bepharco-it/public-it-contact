@@ -540,6 +540,56 @@
         width: 108px;
         height: 60px;
       }
+
+      /* ---------- Liên kết sang trang hướng dẫn email ---------- */
+      .guide {
+        padding: 4px 28px 22px;
+      }
+      .guide-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        text-decoration: none;
+        background: #fff7e6;
+        border: 1px solid #f6e2b3;
+        border-radius: 14px;
+        padding: 14px 18px;
+        transition:
+          transform 0.12s ease,
+          box-shadow 0.12s ease;
+      }
+      .guide-link:hover {
+        transform: translateY(-1px);
+      }
+      .guide-link:focus-visible {
+        outline: 3px solid var(--amber);
+        outline-offset: 2px;
+      }
+      .guide-link .big {
+        display: block;
+        font-weight: 800;
+        font-size: 15.5px;
+        color: var(--amber-ink);
+      }
+      .guide-link .small {
+        display: block;
+        font-size: 12.5px;
+        color: var(--slate);
+        margin-top: 2px;
+      }
+      .guide-link .arrow {
+        font-family: var(--mono);
+        font-size: 18px;
+        color: var(--amber-ink);
+        opacity: 0.7;
+      }
+      @media (max-width: 420px) {
+        .guide {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -634,6 +684,17 @@
           </div>
         </div>
 
+        <div class="guide">
+          <a class="guide-link" id="btnGuide" href="huong-dan-mail.html">
+            <span class="txt">
+              <span class="big">Mới nhận máy? Hướng dẫn đăng nhập email</span>
+              <span class="small"
+                >Các bước đăng nhập và xác thực Microsoft 365, có ảnh minh họa</span
+              >
+            </span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
         <div class="perf" id="beginSectionAsset"></div>
 
         <div class="stub" id="sectionAsset">
@@ -678,6 +739,8 @@
         teamsUrl:
           "https://teams.microsoft.com/l/chat/0/0?users=duy.nguyenthanh@bepharco.com",
         teamsLabel: "Microsoft Teams",
+        // Tên file trang hướng dẫn đăng nhập email (để cùng thư mục với trang này)
+        guideUrl: "huong-dan-mail.html",
 
         // Zalo: khong dung link nua (de tranh lo so dien thoai dang text/href).
         // Lien he Zalo hien thuc hien qua anh QR tinh chen truc tiep trong HTML ben duoi.
@@ -743,6 +806,10 @@
       setInterval(renderStatus, 60 * 1000); // tự cập nhật lại mỗi phút, phòng khi ai mở trang để lâu
 
       document.getElementById("btnTeams").href = CONFIG.teamsUrl;
+      // Link sang trang hướng dẫn: giữ nguyên ?asset=...&date=... (nếu có)
+      // để khi bấm "← Liên hệ phòng CNTT" quay lại, mã thiết bị / ngày bàn giao vẫn hiện đúng.
+      document.getElementById("btnGuide").href =
+        CONFIG.guideUrl + window.location.search;
       document.getElementById("teamsLabel").textContent = CONFIG.teamsLabel;
 
       document.getElementById("hoursT1").textContent = CONFIG.hoursWeekday;
